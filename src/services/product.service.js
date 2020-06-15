@@ -22,6 +22,16 @@ class ProductService {
       });
   }
 
+  remove(id) {
+    return axios
+      .delete(API_URL + 'products/' + id,
+       { headers: authHeader() })
+      .then(response => {
+        console.log('delete', response)
+        return response.data;
+      });
+  }
+
   create(product) {
     return axios
       .post(API_URL + 'products',

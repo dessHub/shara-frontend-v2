@@ -23,6 +23,9 @@ export const product = {
     all({ commit }) {
       ProductService.all();
       commit('fetchAllSuccess');
+    },
+    remove({ commit }, id) {
+      ProductService.remove(id);
     }
   },
   mutations: {
