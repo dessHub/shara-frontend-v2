@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <h3 v-for="(item, index) in products" :key="index">{{item.name}} - ksh.{{item.price}}</h3>
+      <h3>{{product.name}} - ksh.{{product.price}}</h3>
     </header>
   </div>
 </template>
@@ -10,19 +10,20 @@
 import ProductService from '../services/product.service';
 
 export default {
-  name: 'Home',
+  name: 'ProductPage',
   data() {
     return {
-      products: ''
+      product: {}
     };
   },
   mounted() {
-    ProductService.all().then(
+    ProductService.getProduct(this.$route.params.id).then(
       response => {
-        this.products = response;
+        console.log("product respo", response)
+        this.product = response;
       },
       error => {
-        this.products =
+        this.product =
           (error.response && error.data) ||
           error.message ||
           error.toString();

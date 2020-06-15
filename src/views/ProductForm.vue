@@ -1,17 +1,13 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form name="form" @submit.prevent="handleRegister">
+      <div>Product Form</div>
+      <form name="form" @submit.prevent="handleCreate">
         <div v-if="!successful">
           <div class="form-group">
             <label for="name">Name</label>
             <input
-              v-model="user.name"
+              v-model="product.name"
               v-validate="'required|min:3|max:20'"
               type="text"
               class="form-control"
@@ -23,49 +19,21 @@
             >{{errors.first('name')}}</div>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="price">Price</label>
             <input
-              v-model="user.phone"
-              v-validate="'required|min:10|max:12'"
+              v-model="product.price"
+              v-validate="'required|min:1|max:12'"
               type="text"
               class="form-control"
-              name="phone"
+              name="price"
             />
             <div
-              v-if="submitted && errors.has('name')"
+              v-if="submitted && errors.has('price')"
               class="alert-danger"
-            >{{errors.first('name')}}</div>
+            >{{errors.first('price')}}</div>
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              v-model="user.email"
-              v-validate="'required|email|max:50'"
-              type="email"
-              class="form-control"
-              name="email"
-            />
-            <div
-              v-if="submitted && errors.has('email')"
-              class="alert-danger"
-            >{{errors.first('email')}}</div>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              v-model="user.password"
-              v-validate="'required|min:6|max:40'"
-              type="password"
-              class="form-control"
-              name="password"
-            />
-            <div
-              v-if="submitted && errors.has('password')"
-              class="alert-danger"
-            >{{errors.first('password')}}</div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary btn-block">Sign Up</button>
+            <button class="btn btn-primary btn-block">Create</button>
           </div>
         </div>
       </form>
@@ -80,13 +48,13 @@
 </template>
 
 <script>
-import User from '../models/user';
+import Product from '../models/product';
 
 export default {
-  name: 'Register',
+  name: 'Createproduct',
   data() {
     return {
-      user: new User('', '', '', ''),
+      product: new Product('', ''),
       submitted: false,
       successful: false,
       message: ''
@@ -95,23 +63,31 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
+    },
+    isAdmin() {
+      return this.$store.state.auth.user.role === 'admin';
     }
   },
   mounted() {
-    if (this.loggedIn) {
+    if (!this.loggedIn) {
       this.$router.push('/');
+    }
+    if (!this.isAdmin) {
+      this.$router.push('/access/401');
     }
   },
   methods: {
-    handleRegister() {
+    handleCreate() {
       this.message = '';
       this.submitted = true;
       this.$validator.validate().then(isValid => {
         if (isValid) {
-          this.$store.dispatch('auth/register', this.user).then(
+          this.$store.dispatch('product/create', this.product).then(
             data => {
-              this.message = data.message;
+              console.log("produc post", data)
+              const productId = data.id;
               this.successful = true;
+              this.$router.push(`/products/${productId}`);
             },
             error => {
               this.message =

@@ -6,8 +6,8 @@
       </h3>
     </header>
     <p>
-      <strong>Token:</strong>
-      {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
+      <strong>Phone:</strong>
+      {{currentUser.phone}}
     </p>
     <p>
       <strong>Id:</strong>
@@ -17,9 +17,9 @@
       <strong>Email:</strong>
       {{currentUser.email}}
     </p>
-    <strong>Authorities:</strong>
+    <strong>Role:</strong>
     <ul>
-      <li v-for="(role,index) in currentUser.roles" :key="index">{{role}}</li>
+      <li>{{currentUser.role}}</li>
     </ul>
   </div>
 </template>

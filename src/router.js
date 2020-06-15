@@ -33,6 +33,24 @@ export const router = new Router({
       component: () => import('./views/Profile.vue')
     },
     {
+      path: '/products/create',
+      name: 'productform',
+      // lazy-loaded
+      component: () => import('./views/ProductForm.vue')
+    },
+    {
+      path: '/product/:id',
+      name: 'productpage',
+      // lazy-loaded
+      component: () => import('./views/ProductPage.vue')
+    },
+    {
+      path: '/access/401',
+      name: 'accesserror',
+      // lazy-loaded
+      component: () => import('./views/AccessError.vue')
+    },
+    {
       path: '/admin',
       name: 'admin',
       // lazy-loaded
