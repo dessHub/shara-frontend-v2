@@ -9,18 +9,32 @@
       <form name="form" @submit.prevent="handleRegister">
         <div v-if="!successful">
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="name">Name</label>
             <input
-              v-model="user.username"
+              v-model="user.name"
               v-validate="'required|min:3|max:20'"
               type="text"
               class="form-control"
-              name="username"
+              name="name"
             />
             <div
-              v-if="submitted && errors.has('username')"
+              v-if="submitted && errors.has('name')"
               class="alert-danger"
-            >{{errors.first('username')}}</div>
+            >{{errors.first('name')}}</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+              v-model="user.phone"
+              v-validate="'required|min:10|max:12'"
+              type="text"
+              class="form-control"
+              name="phone"
+            />
+            <div
+              v-if="submitted && errors.has('name')"
+              class="alert-danger"
+            >{{errors.first('name')}}</div>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -85,7 +99,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push('/profile');
+      this.$router.push('/');
     }
   },
   methods: {
