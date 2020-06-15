@@ -87,7 +87,7 @@ export default {
               console.log("produc post", data)
               const productId = data.id;
               this.successful = true;
-              this.$router.push(`/products/${productId}`);
+              this.$router.push(`/product/${productId}`);
             },
             error => {
               this.message =

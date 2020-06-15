@@ -51,6 +51,18 @@ export const router = new Router({
       component: () => import('./views/AccessError.vue')
     },
     {
+      path: '/cart',
+      name: 'cart',
+      // lazy-loaded
+      component: () => import('./views/Cart.vue')
+    },
+    {
+      path: '/myorders',
+      name: 'myorders',
+      // lazy-loaded
+      component: () => import('./views/MyOrders.vue')
+    },
+    {
       path: '/admin',
       name: 'admin',
       // lazy-loaded
