@@ -32,9 +32,9 @@
               name="phone"
             />
             <div
-              v-if="submitted && errors.has('name')"
+              v-if="submitted && errors.has('phone')"
               class="alert-danger"
-            >{{errors.first('name')}}</div>
+            >{{errors.first('phone')}}</div>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -110,6 +110,7 @@ export default {
         if (isValid) {
           this.$store.dispatch('auth/register', this.user).then(
             data => {
+              this.$router.push('/login');
               this.message = data.message;
               this.successful = true;
             },
