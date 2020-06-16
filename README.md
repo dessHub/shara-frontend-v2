@@ -1,6 +1,11 @@
 # Shara Frontend
 This frontend consumes [shara api](https://github.com/dessHub/shara-api) 
 
+Admin Credentials
+
+email: admin@mail.com
+password: admin
+
 
 ## Project setup
 ```
