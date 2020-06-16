@@ -21,7 +21,7 @@
                 <td>ksh.{{ item.price }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>       
-                    <button class="btn btn-danger" >
+                    <button class="btn btn-danger" @click="remove(item.id)">
                         <span>Remove</span>
                     </button>
                 </td>
@@ -42,6 +42,12 @@
                             </div>
                         </div>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                  <hr>
+                  <h4>Add products to cart <router-link to="/" class="nav-l">here</router-link></h4>
                 </td>
             </tr>
             </tfoot>
@@ -72,7 +78,7 @@ export default {
     cart() {
       const storeCart = this.$store.state.cart.cart;
       const localCart = JSON.parse(localStorage.getItem('cart'))
-      return storeCart.length > 0 ? storeCart : localCart;
+      return storeCart.length > 0 ? storeCart : (localCart ? localCart : []);
     },
     cartItems() {
         const sumAmount = this.cart.reduce((acc, item) => {
@@ -92,8 +98,22 @@ export default {
       }
       this.$store.dispatch('cart/order', body).then(
         data => {
-          console.log("order her", data)
+          localStorage.removeItem('cart');
           this.$router.push('/myorders');
+        },
+        error => {
+          this.message =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+          this.successful = false;
+        }
+      );
+    },
+    remove(id) {
+      this.$store.dispatch('cart/remove', id).then(
+        () => {
+          this.$router.push('/cart');
         },
         error => {
           this.message =

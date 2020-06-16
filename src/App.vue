@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href class="navbar-brand" @click.prevent>bezKoder</a>
+      <a href class="navbar-brand" @click.prevent>shara</a>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
@@ -16,15 +16,15 @@
         <li v-if="showAdminBoard" class="nav-item">
           <router-link to="/products/create" class="nav-link">Add Products</router-link>
         </li>
-        <li v-if="showModeratorBoard" class="nav-item">
-          <router-link to="/mod" class="nav-link">Moderator Board</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
-        </li>
       </div>
 
       <div v-if="!currentUser" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/cart" class="nav-link">
+            <font-awesome-icon icon="shopping-cart" />
+            {{ cartCount }}
+          </router-link>
+        </li>
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
             <font-awesome-icon icon="user-plus" />Sign Up
@@ -39,9 +39,15 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
+          <router-link to="/cart" class="nav-link">
+            <font-awesome-icon icon="shopping-cart" />
+            {{ cartCount }}
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
-            {{ currentUser.username }}
+            {{ currentUser.name }}
           </router-link>
         </li>
         <li class="nav-item">
@@ -71,12 +77,10 @@ export default {
 
       return false;
     },
-    showModeratorBoard() {
-      if (this.currentUser && this.currentUser.roles) {
-        return this.currentUser.roles.includes('ROLE_MODERATOR');
-      }
-
-      return false;
+    cartCount() {
+      const storeCart = this.$store.state.cart.cart.length;
+      const localCart = JSON.parse(localStorage.getItem('cart'))
+      return storeCart > 0 ? storeCart : (localCart ? localCart.length : 0)
     }
   },
   methods: {

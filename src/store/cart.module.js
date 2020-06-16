@@ -8,7 +8,6 @@ export const cart = {
   },
   actions: {
     async addcart({ commit, state }, product) {
-      console.log("jjjj")
       const currentCart = state.cart
       const cartObj = await CartService.create(product, currentCart)
           commit('createSuccess', cartObj);
@@ -45,7 +44,9 @@ export const cart = {
       state.status.success = false;
     },
     removeItem(state, id) {
-      state.cart = state.cart.filter(item => item.id != id);
+      const newCart = state.cart.filter(item => item.id != id)
+      state.cart = newCart;
+      localStorage.setItem('cart', JSON.stringify(newCart));
     }
   }
 };
