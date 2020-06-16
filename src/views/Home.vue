@@ -62,6 +62,7 @@ export default {
 .products-body {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .product-card {
