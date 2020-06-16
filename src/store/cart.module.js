@@ -4,6 +4,7 @@ export const cart = {
   namespaced: true,
   state: {
     cart: [],
+    cartCount: 0,
     success: false,
   },
   actions: {
@@ -32,6 +33,7 @@ export const cart = {
   mutations: {
     createSuccess(state, cart) {
       state.cart = cart;
+      state.cartCount = cart.length;
       state.success = true;
     },
     createFailure(state) {
@@ -39,6 +41,8 @@ export const cart = {
     },
     orderSuccess(state) {
       state.success = true;
+      state.cart = []
+      state.cartCount = 0
     },
     orderFailure(state) {
       state.status.success = false;
@@ -46,6 +50,7 @@ export const cart = {
     removeItem(state, id) {
       const newCart = state.cart.filter(item => item.id != id)
       state.cart = newCart;
+      state.cartCount = newCart.length;
       localStorage.setItem('cart', JSON.stringify(newCart));
     }
   }

@@ -10,7 +10,8 @@
                 <th scope="col">Order No</th>
                 <th scope="col">NO Items</th>
                 <th scope="col">Sum Amount</th>
-                <th scope="col">Product Id</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
                 </tr>
             </thead>

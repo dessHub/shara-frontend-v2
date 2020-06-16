@@ -81,9 +81,9 @@ export default {
       return false;
     },
     cartCount() {
-      const storeCart = this.$store.state.cart.cart.length;
+      const storeCart = this.$store.state.cart.cartCount;
       const localCart = JSON.parse(localStorage.getItem('cart'))
-      return storeCart > 0 ? storeCart : (localCart ? localCart.length : 0)
+      return storeCart
     }
   },
   methods: {
