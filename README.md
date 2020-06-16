@@ -1,5 +1,5 @@
 # Shara Frontend
-This fron consumes [shara api](https://github.com/dessHub/shara-api) 
+This frontend consumes [shara api](https://github.com/dessHub/shara-api) 
 
 
 ## Project setup
