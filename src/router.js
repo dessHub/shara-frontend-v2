@@ -63,6 +63,12 @@ export const router = new Router({
       component: () => import('./views/MyOrders.vue')
     },
     {
+      path: '/orders',
+      name: 'orders',
+      // lazy-loaded
+      component: () => import('./views/Orders.vue')
+    },
+    {
       path: '/admin',
       name: 'admin',
       // lazy-loaded

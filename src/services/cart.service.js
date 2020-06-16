@@ -45,9 +45,20 @@ class CartService {
       });
   }
 
-  getMyOrders(id) {
+  getMyOrders() {
     return axios
       .get(API_URL + 'orders',
+       { headers: authHeader() }
+       )
+      .then(response => {
+        return response.data;
+      });
+
+  }
+
+  getAllOrders() {
+    return axios
+      .get(API_URL + 'admin/orders',
        { headers: authHeader() }
        )
       .then(response => {

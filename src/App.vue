@@ -14,6 +14,9 @@
           </router-link>
         </li>
         <li v-if="showAdminBoard" class="nav-item">
+          <router-link to="/orders" class="nav-link">All Orders</router-link>
+        </li>
+        <li v-if="showAdminBoard" class="nav-item">
           <router-link to="/products/create" class="nav-link">Add Products</router-link>
         </li>
       </div>
